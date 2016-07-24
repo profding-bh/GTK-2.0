@@ -28,6 +28,53 @@ main(int argc,char *argv[])
     // 最常用。还可以取另一个值 GTK_WINDOW_POPUP 指明窗口的类型为弹出式的无边框的
     // 窗口.
 
+
+    // 为信号连接回调函数;
+    // 为窗口或者控件加回调函数有2种方式
+    //《1》一是直接调用已经有的函数（比如gtk_main_quit）,在窗口，或控件创建完成后
+    //直接引用g_signal_connect宏。如下：
+    g_signal_connect(G_OBJECT(window),"delete_event"
+            ,G_CALLBACK(gtk_main_quit),NULL);
+//<2>第2种方式是： 先定义好回调函数，在窗口，或控件创建完成后
+    //直接引用g_signal_connect宏。如下：
+/*
+// 声明回调函数on_delete_event
+void on_delete_event(GtkWidget *widget,GdtEvent *event,gpointer data)
+{
+  gtk_main_quit();// 还是需要调用系统的。
+  return NULL;
+}
+
+
+
+  g_signal_connect(G_OBJECT(window),"delete_event"
+            ,G_CALLBACK(on_delete_event),NULL);
+
+
+
+*/
+
+
+
+
+//GTK+2.0采用了一种信号/回调函数机制来处理窗口外部传来的事件、消息或信号。
+//也就是先为窗口或控件定义一系列信号。在编程中引用信号名称为窗口或控件添加回调函数。
+//当信号发生时，程序自动调用为信号连接的回调函数。
+//窗口的信号有很多，
+//'key_press_event' 在按键时发生
+//‘foucs’ 在获得焦点时发生
+//'delete_event'在窗口关闭时发生
+//
+//退出GTK+2.0程序要调用gtk_main_quit();函数。他的功能就是退出主循环。
+//也就是结束程序的运行。
+//
+//
+    gtk_window_set_title(GTK_WINDOW(window),"一个功能完善的窗口");
+    gtk_window_set_default_size(GTK_WINDOW(window),500,100);
+    gtk_window_set_position(GTK_WINDOW(window),GTK_WIN_POS_CENTER);
+
+
+
     gtk_widget_show(window);// 显示控件。参数是要显示的控件的指针。
 
     gtk_main();
