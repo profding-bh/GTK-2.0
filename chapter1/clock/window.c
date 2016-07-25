@@ -55,7 +55,7 @@ for(j=i;j>=0;j--)//生成的数字是逆序的，所以要逆序输出
 printf("\n");
 */
 for(m=0,p = i-1; m< p;m++,p--)//逆序
-   { 
+   {
 int a = s[m];
 s[m] = s[p];
 s[p] = a;
@@ -105,7 +105,9 @@ thread_start(void *arg)
 		n--;
            itoa(n,timestr);
 //printf("timestr is %s\n",timestr);
-          gtk_label_set_text(label,timestr);
+          gdk_threads_enter();
+          gtk_label_set_text(label,timestr);// 可以认为是主线程刷新UI
+          gdk_threads_leave();
 
          }
     }
@@ -123,7 +125,7 @@ main(int argc,char *argv[])
 // EXIT_SUCCESS
 // EXIT_FAILURE
     GtkWidget *window;
-  
+
     // 窗口控件指针。
     // GtkWidget是 GTK+2.0控件类型，几乎所有的GTK+2.0控件都用这一类型声明。
 
