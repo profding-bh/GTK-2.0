@@ -139,7 +139,7 @@ main(int argc,char *argv[])
 
     label = gtk_label_new(timestr);
 
-    gtk_widget_set_size_request(label,38,15);
+  //  gtk_widget_set_size_request(label,38,15);
 
     gtk_container_add(GTK_CONTAINER(window),label);
 

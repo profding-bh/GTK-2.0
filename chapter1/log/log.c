@@ -35,7 +35,7 @@ guint timer = g_timeout_add(500,(GSourceFunc)deal_time,NULL);
 
 gboolean g_source_remove(guint tag);
 
-or 
+or
 
 void gtk_timeout_remove(gint tag);
 
@@ -151,7 +151,10 @@ main(int argc,char *argv[])
     gtk_widget_show(window);// 显示控件。参数是要显示的控件的指针。
 
 
-
+g_print("hello world");
+g_warning("hello xxxxxxxxxxx");
+g_message("yyyyyy");
+//g_error("errrrrr");
 	// 事件循环。
     gtk_main();
 

@@ -155,3 +155,118 @@ all:
     return EXIT_SUCCESS;
 }
 
+
+/*
+
+GTK+2.0控件是统一用GtkWidget类型来管理的。
+gtk_button_new 创建一个不显示内容的按钮
+
+gtk_button_new_with_label   创建一个显示文字的按钮
+
+
+
+代码书写顺序：
+
+先定义，再创建，再加回调函数。最后显示。
+
+
+GTK+2.0的函数名称：
+以gtk开头，用_连接。
+第2个单词表示控件类型。比如：button,window.
+再后面的相关的单词表示要做的动作。
+
+例如：
+gtk_控件类型_动作
+gtk_button_new
+
+
+容器：
+
+GtkContainer — Base class for widgets which contain other widgets
+
+
+GTK+2.0中的控件的摆放  采用了容器(Container)，这一概念。
+
+即所有的GTK+2.0控件分成2种：一种是能容纳其他控件的容器。
+另一种是不能容纳其他控件的非容器控件。
+
+
+容器控件又分为能容纳多个控件的容器和 只能容纳一个控件的容器。
+
+
+
+窗口控件也是一种容器。
+
+GTK+2.0提供了与容器相关的操作函数，以gtk_container开头。
+
+gtk_container_add： 将另一个控件加入到容器中。
+
+void
+gtk_container_add (GtkContainer *container,
+                   GtkWidget *widget);
+
+Adds widget to container . Typically used for simple containers such as GtkWindow, GtkFrame, or GtkButton; for more complicated layout containers such as GtkBox or GtkGrid, this function will pick default packing parameters that may not be correct. So consider functions such as gtk_box_pack_start() and gtk_grid_attach() as an alternative to gtk_container_add() in those cases. A widget may be added to only one container at a time; you can’t place the same widget inside two different containers.
+
+Note that some containers, such as GtkScrolledWindow or GtkListBox, may add intermediate children between the added widget and the container.
+
+Parameters
+container
+a GtkContainer
+ 
+widget
+a widget to be placed inside container
+
+
+
+gtk_container_remove:移除
+
+void
+gtk_container_remove (GtkContainer *container,
+                      GtkWidget *widget);
+
+Removes widget from container . widget must be inside container . Note that container will own a reference to widget , and that this may be the last reference held; so removing a widget from its container can destroy that widget. If you want to use widget again, you need to add a reference to it before removing it from a container, using g_object_ref(). If you don’t want to use widget again it’s usually more efficient to simply destroy it directly using gtk_widget_destroy() since this will remove it from the container and help break any circular reference count cycles.
+
+Parameters
+container
+a GtkContainer
+ 
+widget
+a current child of container
+
+
+
+gpointer
+g_object_ref (gpointer object);
+
+Increases the reference count of object .
+
+Parameters
+object
+a GObject. [type GObject.Object]
+Returns
+the same object . [type GObject.Object][transfer none]
+
+
+
+
+GObject — The base object type
+
+#define G_OBJECT(object)      (G_TYPE_CHECK_INSTANCE_CAST ((object), G_TYPE_OBJECT, GObject))
+
+Casts a GObject or derived pointer into a (GObject*) pointer. Depending on the current debugging level, this function may invoke certain runtime checks to identify invalid casts.
+
+Parameters
+object
+Object which is subject to casting.// 可以...的
+
+
+
+
+另一个常用的与容器相关的函数是：
+gtk_container_set_border_width
+
+
+
+
+*/
+

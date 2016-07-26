@@ -1,0 +1,138 @@
+
+
+#include <glib.h>
+
+g_message:
+
+g_message函数显示与错误无关的消息。在传递的字符串前打印 "message:"
+
+#define             g_message(...)
+
+
+
+A convenience function/macro to log a normal message.
+
+If g_log_default_handler() is used as the log handler function, 
+a new-line character will automatically be appended to @...,
+ and need not be entered manually.
+
+Parameters
+...
+format string, 
+followed by parameters to insert into the format string (as with printf())
+
+
+
+
+g_print:
+
+g_print函数通常用于调试。你可以在开发过程中使用g_print函数，并在实际使用时撤消它的功能。
+
+void
+g_print (const gchar *format,
+         ...);
+
+g_print() should not be used from within libraries for debugging messages,
+ since it may be redirected by applications to special purpose message windows or even files. Instead, libraries should use g_log(), 
+or the convenience functions g_message(), g_warning() and g_error().
+
+
+
+
+
+g_log:
+
+
+void
+g_log (const gchar *log_domain,
+       GLogLevelFlags log_level,
+       const gchar *format,
+       ...);
+
+Logs an error or debugging message.
+If the log level has been set as fatal, the abort() 
+function is called to terminate the program.
+If g_log_default_handler() is used as the log handler function,
+a new-line character will automatically be appended to @..., 
+and need not be entered manually.
+
+
+Parameters:
+
+log_domain
+the log domain, usually G_LOG_DOMAIN, or NULL for the default. [nullable]
+
+log_level
+the log level, either from GLogLevelFlags or a user-defined level
+ 
+format
+the message format. See the printf() documentation
+...
+the parameters to insert into the format string
+
+
+
+
+g_warning:
+
+#define             g_warning(...)
+
+A convenience function/macro to log a warning message.
+
+This is not intended for end user error reporting. 
+
+Use of GError is preferred for that instead, 
+as it allows calling functions to perform actions conditional on the type of error.
+
+You can make warnings fatal at runtime by setting the G_DEBUG environment variable (see Running GLib Applications).
+
+If g_log_default_handler() is used as the log handler function, a newline character will automatically be appended to @..., and need not be entered manually.
+
+
+Parameters
+...
+format string, followed by parameters to insert into the format string (as with printf())
+
+
+
+g_error:
+
+
+#define             g_error(...)
+
+A convenience function/macro to log an error message.
+
+This is not intended for end user error reporting. 
+
+Use of GError is preferred for that instead, as it allows calling functions to perform actions conditional on the type of error.
+
+Error messages are always fatal, resulting in a call to abort() to terminate the application.
+ This function will result in a core dump; don't use it for errors you expect. 
+Using this function indicates a bug in your program, i.e. an assertion failure.
+
+
+If g_log_default_handler() is used as the log handler function, a new-line character will automatically be appended to @..., and need not be entered manually.
+Parameters
+...
+format string, followed by parameters to insert into the format string (as with printf())
+
+
+
+
+struct GError {
+  GQuark       domain;
+  gint         code;
+  gchar       *message;
+};
+
+The GError structure contains information about an error that has occurred.
+
+Members
+
+GQuark domain;  error domain, e.g. G_FILE_ERROR
+ 
+gint code; error code, e.g. G_FILE_ERROR_NOENT
+ 
+gchar *message; human-readable informative error message
+
+
