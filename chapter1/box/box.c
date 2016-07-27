@@ -7,6 +7,18 @@
 // EXIT_FAILURE
 
 
+
+/*
+盒状容器:
+
+
+
+
+*/
+
+
+
+
 gint count = 1;
 
 // 声明回调函数on_delete_event
@@ -22,6 +34,8 @@ void on_delete_event(GtkWidget *widget,GdkEvent *event,gpointer data)
 // 可以询问用户是否真正退出程序运行。windows系统，点击关闭按钮，询问用户释放退出，
 // 不就是这样做的吗！！
 }
+
+
 
 
 
@@ -103,21 +117,13 @@ GTK_WIN_POS_CENTER_ON_PARENT
 gtk_container_set_border_width(GTK_CONTAINER(window),40);
 
 
-GtkWidget *button2;
-
 button = gtk_button_new_with_label("按下此按钮会在终端上显示一行信息");
-
-button2 = gtk_button_new_with_label("息");
-
 g_signal_connect(G_OBJECT(button),"clicked",
 G_CALLBACK(on_button_clicked),(gpointer)count);
 
 gtk_container_add(GTK_CONTAINER(window),button);
-gtk_container_add(GTK_CONTAINER(window),button2);
-
 
 gtk_widget_show(button);
-gtk_widget_show(button2);
     gtk_widget_show(window);// 显示控件。参数是要显示的控件的指针。
 
     gtk_main();

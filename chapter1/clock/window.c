@@ -83,6 +83,36 @@ on_button_clicked(GtkWidget *button,gpointer userdata)
 
 
 static void *
+thread_start_2(void *arg)
+{
+    time_t curr;
+	int n;
+    printf("New thread started\n");
+
+    pthread_cleanup_push(cleanup_handler,NULL);
+
+
+    curr = time(NULL);
+    while(!done){
+       
+          sleep(1);
+            n = atoi(timestr);// 还是有问题。
+	        n--;
+           itoa(n,timestr);
+          gdk_threads_enter();
+          gtk_label_set_text(label,timestr);// 可以认为是主线程刷新UI
+          gdk_threads_leave();
+        
+    }
+    pthread_cleanup_pop(cleanup_pop_arg);// pthread_cleanup_pop(0)将不会调用cleanup_handler
+    printf("xxxxxxx\n");
+    return NULL;
+}
+
+
+
+
+static void *
 thread_start(void *arg)
 {
     time_t curr;
@@ -149,7 +179,7 @@ main(int argc,char *argv[])
 
 
     //创建一个子线程。
-    s = pthread_create(&thr,NULL,thread_start,NULL);
+    s = pthread_create(&thr,NULL,thread_start_2,NULL);
     if(0 != s)
         handle_error_en(s,"pthread_create");
 
