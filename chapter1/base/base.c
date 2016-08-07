@@ -30,6 +30,8 @@ main(int argc,char *argv[])
 
     gtk_widget_show(window);// 显示控件。参数是要显示的控件的指针。
 
+	g_print("hello world");
+
     gtk_main();
     // 他是GTK+2.0的主事件循环。每一个GTK+2.0程序都要有一个。
     // 否则程序就无法运行。
