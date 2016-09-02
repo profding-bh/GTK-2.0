@@ -13,7 +13,7 @@
 /*
 
 Q:
-How to conmple & run?
+How to compile & run?
 
 A:
 the Makefile is below:
