@@ -208,7 +208,7 @@ GTK+2.0中能容纳多个控件的容器主要有盒状容器（GtkBox）
 按钮盒（GtkButtonBox）
 分隔面版(GtkPanel)
 固定布局（GtkFixed）
-工具栏(GtkToobar)
+工具栏(GtkToolbar)
 其中，最常见的是  盒状容器 和  表格容器
 
 

@@ -32,7 +32,8 @@ on_button_clicked(GtkWidget *button,gpointer userdata)
 	g_print("%p",button);
     g_print("你好,这是Hello功能的测试.");
 g_print("Hello . This is a test . ");
-g_print("%d\n",(gint)userdata);// userdata传入进来之后，就不再改变。
+//g_print("userdata %d\n",(gint)userdata);// userdata传入进来之后，就不再改变。???
+g_print("userdata %d\n",(gint)userdata);
 g_print("%d\n",count);
 count = count + 1 ;
 }
@@ -103,32 +104,39 @@ GTK_WIN_POS_CENTER_ON_PARENT
 
 gtk_container_set_border_width(GTK_CONTAINER(window),40);
 
+/*
+另 一 个 常 用 到 的 与 容 器 相 关 的 函 数 是 gtk_container_set_
+border_width。它用来设定容器边框的宽度,格式如例中所示,宽度的单位是像素,可
+以根据需要自行设定。如不设定窗口边框的宽度,其默认值是 0
 
+*/
 GtkWidget *button2;
 
 button = gtk_button_new_with_label("按下此按钮会在终端上显示一行信息");
 
-button2 = gtk_button_new_with_label("......");// 没有用，默认一个window只能添加一个控件。
+//button2 = gtk_button_new_with_label("......");// 没有用，默认一个window只能添加一个控件。
 
 /*
 
-(hello:121866): Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, but as a GtkBin subclass a GtkWindow can only contain one widget at a time; it already contains a widget of type GtkButton
+(hello:121866): Gtk-WARNING **: Attempting to add a widget with type GtkButton to a c, but as a GtkBin subclass a GtkWindow can only contain one widget at a time; it already contains a widget of type GtkButton
 
 
 */
+//g_signal_connect(G_OBJECT(button),"clicked",
+//G_CALLBACK(on_button_clicked),(gpointer)count);
+
 g_signal_connect(G_OBJECT(button),"clicked",
 G_CALLBACK(on_button_clicked),(gpointer)count);
-
 
 g_print("main %p",button);
 
 
 gtk_container_add(GTK_CONTAINER(window),button);
-gtk_container_add(GTK_CONTAINER(window),button2);
+//gtk_container_add(GTK_CONTAINER(window),button2);
 
 
 gtk_widget_show(button);
-gtk_widget_show(button2);
+//gtk_widget_show(button2);
     gtk_widget_show(window);// 显示控件。参数是要显示的控件的指针。
 
     gtk_main();
