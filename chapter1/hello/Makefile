@@ -1,6 +1,6 @@
 CC = gcc
 all:
-	$(CC) -o window window.c `pkg-config --cflags --libs gtk+-2.0`
+	$(CC) -o hello hello.c `pkg-config --cflags --libs gtk+-2.0`
 .PHONY:clean
 clean:
-	rm window
+	rm hello
